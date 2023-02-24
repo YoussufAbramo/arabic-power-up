@@ -1,26 +1,49 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title> -->
 </head>
+
 <body>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script>
-    TrelloPowerUp.initialize ({
+    TrelloPowerUp.initialize({
       'card-buttons': function (t, options) {
         return [
           {
             icon: "/arablize.png",
             text: "Hello World!",
-            callback: function(t) {
+            callback: function (t) {
               return t.card().then(card => alert(`Hello World~`))
             }
           }
         ]
       }
     })
+
+
+    TrelloPowerUp.initialize({
+      'board-buttons': function (t, options) {
+        return t.get('board', 'shared', 'mykey', { powerup: 'My Power-Up' })
+          .then(function (savedData) {
+            // Here you can perform initialisation tasks related to the power up
+
+            // Add on click handler
+            $('.my-css-apply-button').click(function () {
+              // DO STUFFNN ON CLICK
+              // Execute code once page has loaded
+              var css = '.cssfile { background: #666; color: #FFF; }';
+              $("<style type='text/css'> " + css + " </style>").appendTo("head");
+            });
+          });
+      },
+    });
+
+
   </script>
 </body>
+
 </html>
